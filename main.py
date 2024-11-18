@@ -79,12 +79,35 @@ def display_conversation_and_audio():
 # Apply Custom CSS
 
 css = '''
-<div class="avatar">
-        <img src="image/constitution_of_india.jpg" style="max-height: 150px; max-width: 150px; border-radius: 50%; object-fit: cover;margin-left: 16rem">
-    </div> 
 <style>
+    /* Avatar image styling */
+    .avatar {
+        text-align: center;
+        margin-top: 2rem;
+    }
+    
+    .avatar img {
+        max-height: 250px;
+        max-width: 250px;
+        object-fit: contain;
+        border-radius: 10px;
+        border: 2px solid #4a4a4a;
+    }
+
+    /* Title styling */
+    .title {
+        text-align: center;
+        font-size: 3rem;
+        color: #4a4a4a;
+        margin-top: 1rem;
+        font-weight: bold;
+    }
+
     .chat-message {
-        padding: 1.5rem; border-radius: 0.5rem; margin-bottom: 1rem; display: flex;
+        padding: 1.5rem;
+        border-radius: 0.5rem;
+        margin-bottom: 1rem;
+        display: flex;
     }
     .chat-message.user {
         background-color: #e3a9d5;
@@ -107,16 +130,36 @@ css = '''
         background-color: skyblue !important;
     }
     [data-testid="stSidebar"] {
-        background-color: lightgray !important;
     }
 </style>
 '''
-st.markdown(css, unsafe_allow_html = True)
+
+# Add the CSS to the Streamlit app
+st.markdown(css, unsafe_allow_html=True)
+
+# Display the avatar image at the top
+st.markdown('''
+    <div class="avatar">
+        <img src="https://tile.loc.gov/image-services/iiif/service:ll:llscd:57026883:00010000/full/pct:100/0/default.jpg" 
+            style="max-height: 250px; 
+            max-width: 250px; 
+            object-fit: contain; 
+            border-radius: 10px; 
+            border: 2px solid #4a4a4a;">
+    </div>
+''', unsafe_allow_html=True)
+
+# Display the title below the image
+st.markdown('<h1 class="title">🎙️ConvoConstitution🤖</h1>', unsafe_allow_html=True)
 
 bot_template = '''
 <div class="chat-message bot">
     <div class="avatar">
-        <img src="https://i.pinimg.com/originals/0c/67/5a/0c675a8e1061478d2b7b21b330093444.gif" style="max-height: 70px; max-width: 50px; border-radius: 50%; object-fit: cover;">
+        <img src="https://i.pinimg.com/originals/0c/67/5a/0c675a8e1061478d2b7b21b330093444.gif" 
+            style="max-height: 70px; 
+            max-width: 50px; 
+            border-radius: 50%; 
+            object-fit: cover;">
     </div>
     <div class="message">{{MSG}}</div>
 </div>
@@ -125,7 +168,11 @@ bot_template = '''
 user_template = '''
 <div class="chat-message user">
     <div class="avatar">
-        <img src="https://th.bing.com/th/id/OIP.uDqZFTOXkEWF9PPDHLCntAHaHa?pid=ImgDet&rs=1" style="max-height: 80px; max-width: 50px; border-radius: 50%; object-fit: cover;">
+        <img src="https://th.bing.com/th/id/OIP.uDqZFTOXkEWF9PPDHLCntAHaHa?pid=ImgDet&rs=1" 
+            style="max-height: 80px; 
+            max-width: 50px; 
+            border-radius: 50%; 
+            object-fit: cover;">
     </div>    
     <div class="message">{{MSG}}</div>
 </div>
@@ -229,8 +276,6 @@ def handle_user_input(user_question):
                 st.markdown(bot_template.replace("{{MSG}}", messages.content), ussafe_allow_html=True)
 
 api_key = gemini_api_key 
-
-st.title("🎙️ConvoConstitution🤖")
 
 # Sidebar for language selection and   Q/A type
 
