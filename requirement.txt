@@ -1,0 +1,13 @@
+streamlit
+streamlit-mic-recorder
+langchain
+langchain-google-genai
+gtts
+PyPDF2
+python-docx
+faiss-cpu
+transformers
+torch
+sentence-transformers
+langchain_community
+
